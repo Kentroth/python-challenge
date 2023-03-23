@@ -7,7 +7,6 @@ csvpath=os.path.join("Resources","budget_data.csv")
 with open(csvpath) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
 # Sets counts for variables 
-    # and Desi is cooler than Hugo
     row_count=0
     pnlsum=0
     open_balance=0
@@ -30,15 +29,15 @@ with open(csvpath) as csvfile:
         row_count+= 1
     #Calculates net total amount of "Profit/Losses" over the entire period
         pnlsum+= int(value)
-    #Calculates changes in "Profit/Losses" over the entire period,
+    #Calculates changes in "Profit/Losses" over the entire period, average calculated below
         if row_count==1:
             open_balance+= int(value)
-        if row_count==86: #***Different way to find this #?, len()?***
+        if row_count==86: #**I need a better way to calculate this value**
             close_balance+= int(value)
     #Calculates Min/Max PnL
         row_b_value= int(value)
         change_rows=(row_b_value-row_a_value)
-        old_value=int(value)
+        old_value=int(value) #Saves old_value to be compared in next loop
         if max_value<change_rows:
             max_value=change_rows
         if max_value==change_rows:
